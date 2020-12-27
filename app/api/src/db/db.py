@@ -59,13 +59,15 @@ def keys(obj):
 def drop_records(cursor, conn, table_name):
     cursor.execute(f"DELETE FROM {table_name};")
     conn.commit()
+        ALTER SEQUENCE <table name>_id_seq RESTART;
+    cursor.execute(f'')
 
 def drop_tables(table_names, cursor, conn):
     for table_name in table_names:
         drop_records(cursor, conn, table_name)
 
 def drop_all_tables(conn, cursor):
-    table_names = ['venue_categories', 'locations', 'zipcodes', 'cities', 'states', 'categories', 'venues']
+    table_names = ['', 'locations', 'zipcodes', 'cities', 'states', 'categories', 'venues']
     drop_tables(table_names, cursor, conn)
 
 def find_by_name(Class, name, cursor):
