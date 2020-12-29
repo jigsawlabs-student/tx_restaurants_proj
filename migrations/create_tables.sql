@@ -1,6 +1,6 @@
 DROP TABLE IF EXISTS retailers;
 DROP TABLE IF EXISTS cities;
-DROP TABLE IF EXISTS zips;
+DROP TABLE IF EXISTS zipcodes;
 DROP TABLE IF EXISTS cities_zips;
 
 CREATE TABLE IF NOT EXISTS cities (
@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS cities (
   name VARCHAR(255)
 );
 
-CREATE TABLE IF NOT EXISTS zips (
+CREATE TABLE IF NOT EXISTS zipcodes (
   zip INTEGER PRIMARY KEY
   -- more to go here later
 );
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS retailers (
   cover_sales INT,
   CONSTRAINT fk_zip
       FOREIGN KEY(zip_id) 
-      REFERENCES zips(zip)
+      REFERENCES zipcodes(zip)
       ON DELETE CASCADE,
   CONSTRAINT fk_city
       FOREIGN KEY(city_id) 
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS retailers (
       ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS cities_zips (
+CREATE TABLE IF NOT EXISTS cities_zipcodes (
   id SERIAL PRIMARY KEY,
   city_id INT,
   zip_id INT,
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS cities_zips (
       ON DELETE CASCADE,
   CONSTRAINT fk_zip
       FOREIGN KEY(zip_id) 
-      REFERENCES zips(zip)
+      REFERENCES zipcodes(zip)
       ON DELETE CASCADE
 );
 
