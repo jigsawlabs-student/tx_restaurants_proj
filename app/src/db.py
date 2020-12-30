@@ -1,13 +1,20 @@
 from flask import current_app
 from flask import g
 import psycopg2
-import db.db_pass as pw
+import os
+from dotenv import load_dotenv
 
-conn_dev = psycopg2.connect(database='jigsaw_project', user='postgres', password=pw.passwd)
+load_dotenv()
+
+db_name = os.environ.get('DB_NAME')
+db_user = os.environ.get('DB_USER')
+db_pw = os.environ.get('DB_PASS')
+print(db_user)
+conn_dev = psycopg2.connect(database=db_name, user=db_user, password=db_pw)
 
 def get_db():
     if "db" not in g:
-        g.db = psycopg2.connect(user='postgres', password=passwd,
+        g.db = psycopg2.connect(user=db_user, password=db_pw,
             dbname = current_app.config['DATABASE'])
     return g.db
 

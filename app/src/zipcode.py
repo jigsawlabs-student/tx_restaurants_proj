@@ -1,4 +1,4 @@
-import db
+import src.db
 import models
 
 class Zipcode:
