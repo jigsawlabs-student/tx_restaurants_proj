@@ -1,17 +1,14 @@
 import psycopg2
-from db import *
-from src import *
-import src
-from db import conn, cursor, find_or_create_by_name, find_by_name, save
+from app.src import *
 
 
 drop_all_tables(conn, cursor)
 
-def build_city_state(city_name = '', state_name = ''):
-    state = find_or_create_by_name(src.State, state_name, conn, cursor)
+def build_city_zipcode(city_name = '', zipcode = ''):
+    zipcode = find_or_create_by_name(src.Zipcode, zipcode, conn, cursor)
     city = find_by_name(src.City, city_name, cursor)
     if not city:
-        city = City(name = state_name, state_id = state.id)
+        city = City(name = city_name='')
         save(city, conn, cursor)
     return city, state
 

@@ -1,7 +1,6 @@
 from .zipcode import Zipcode
 from .city import City
 # from .db import *
-from .db_pass import *
 
 def initialize_table(this, **kwargs):
     for key in kwargs.keys():

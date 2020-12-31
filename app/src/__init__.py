@@ -2,10 +2,9 @@
 import simplejson as json
 # from flask import request
 
-from .zipcode import Zipcode
-from .city import City
+from .models import *
 from .db import *
-from .adaptors import *
+# from .adaptors import *
 
 TESTING = True
 DEBUGGING = True
