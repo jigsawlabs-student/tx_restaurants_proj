@@ -6,12 +6,13 @@ DROP TABLE IF EXISTS zipcodes;
 
 CREATE TABLE IF NOT EXISTS cities (
   id SERIAL PRIMARY KEY,
-  name VARCHAR(255)
+  name VARCHAR(255) UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS zipcodes (
-  id SERIAL PRIMARY KEY, -- Shouldn't need this, but forced by code in db.py
-  code INT UNIQUE
+  id SERIAL PRIMARY KEY, -- Shouldn't need this, but forced to by  
+                         -- save() in db.py.
+  name VARCHAR(5) UNIQUE -- Forced to use VARCHAR by find_by_name() in db.py
   -- more to go here later, maybe
 );
 
