@@ -90,6 +90,38 @@ def create_app(database='jigsaw_project_test', testing = TESTING, debug = DEBUGG
         city_dicts = [city.__dict__ for city in cities]
         return json.dumps(city_dicts, default=str)
 
+    @app.route('/merchants')
+    def merchants():
+        """Return all merchants in DB."""
+        conn = db.get_db()
+        cursor = conn.cursor()
+
+        merchants = db.find_all(models.Merchant, cursor)
+        merchant_dicts = [merchant.__dict__ for merchant in merchants]
+        return json.dumps(merchant_dicts, default=str)
+
+    @app.route('/merchants_for_city/<city_name>')
+    def merchants_for_city(city_name):
+        """ For a city with name city_name, return all merchants in that city."""
+        conn = db.get_db()
+        cursor = conn.cursor()
+
+        merchants = db.find_by_name(City, city_name, cursor).merchants(cursor)
+        merchant_dicts = [merchant.__dict__ for merchant in merchants]
+        return json.dumps(merchant_dicts, default=str)
+
+
+    @app.route('/merchants_for_zip/<zipcode>')
+    def merchants_for_zip(zipcode):
+        """ For a zip with name zipcode, return all merchants in that zipcode."""
+        conn = db.get_db()
+        cursor = conn.cursor()
+        print(db.find_by_name(Zipcode, zipcode, cursor))
+        merchants = db.find_by_name(Zipcode, zipcode, cursor).merchants(cursor)
+        print(merchants)
+        merchant_dicts = [merchant.__dict__ for merchant in merchants]
+        return json.dumps(merchant_dicts, default=str)
+
     return app
 
 
