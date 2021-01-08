@@ -2,7 +2,7 @@ from distutils import util
 from flask import Flask, request
 import simplejson as json
 # from .db import get_db
-from .models import City, CityZipcode, Zipcode
+from .models import City, CityZipcode, Merchant, Table, Zipcode
 
 from .db import *
 # from .adaptors import *
@@ -20,6 +20,9 @@ if TESTING:
 db_user = os.environ.get('DB_USER')
 db_pw = os.environ.get('DB_PASS')
 
+# TODO: What information should I "surface" on, say, city? 
+# Should I list restaurants and zip, for instance?
+# In that case, I could remove zip_and_city_of_merchant().
 
 def create_app(database='jigsaw_project_test', testing = TESTING, debug = DEBUGGING):
     """Create and configure an instance of the Flask application."""
@@ -110,16 +113,25 @@ def create_app(database='jigsaw_project_test', testing = TESTING, debug = DEBUGG
         merchant_dicts = [merchant.__dict__ for merchant in merchants]
         return json.dumps(merchant_dicts, default=str)
 
-
     @app.route('/merchants_for_zip/<zipcode>')
     def merchants_for_zip(zipcode):
         """ For a zip with name zipcode, return all merchants in that zipcode."""
         conn = db.get_db()
         cursor = conn.cursor()
-        print(db.find_by_name(Zipcode, zipcode, cursor))
         merchants = db.find_by_name(Zipcode, zipcode, cursor).merchants(cursor)
-        print(merchants)
         merchant_dicts = [merchant.__dict__ for merchant in merchants]
+        return json.dumps(merchant_dicts, default=str)
+
+    @app.route('/zip_and_city_of_merchant/<merchant_name>')
+    def zip_and_city_of_merchant(merchant_name):
+        """ For a merchant with name merchant_name, return its zipcode and city."""
+        conn = db.get_db()
+        cursor = conn.cursor()
+
+        merchant = Merchant.find_by_name(merchant_name, cursor)
+        zipcode = merchant.zipcode(cursor)
+        city = merchant.city(cursor)
+        merchant_dicts = [{'zipcode': zipcode.name, 'city': city.name}]
         return json.dumps(merchant_dicts, default=str)
 
     return app

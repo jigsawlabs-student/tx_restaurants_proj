@@ -10,7 +10,9 @@ if os.environ.get('TESTING') == 'True':
     db_name += '_test'
 db_user = os.environ.get('DB_USER')
 db_pw = os.environ.get('DB_PASS')
-# TODO: see line 24. Could/should do this in fixture instead, for eventual Flask testing.
+# TODO: see line 26. Could/should do this in fixture instead, for eventual Flask testing.
+# ^^^ huh? ^^^
+# TODO: Parts of this could/should be moved to orm.py, no?
 
 TABLES = ['zipcodes', 'cities', 'merchants', 'cities_zipcodes']
 
@@ -109,26 +111,3 @@ def drop_tables(table_names, cursor, conn):
 def drop_all_tables(conn, cursor):
     table_names = TABLES
     drop_tables(table_names, cursor, conn)
-
-# def find_by_name(This_class, name, cursor):
-#     query = f"""SELECT * FROM {This_class.__table__} WHERE name = %s """
-#     cursor.execute(query, (name,))
-#     record =  cursor.fetchone()
-#     obj = build_from_record(This_class, record)
-#     return obj
-
-# def find_or_create_by_name(This_class, name, conn, cursor):
-#     obj = find_by_name(This_class, name, cursor)
-#     if not obj:
-#         # new_obj = This_class()
-#         # new_obj.name = name
-#         obj = save(This_class(name=name), conn, cursor)
-#     return obj
-
-# def find_or_build_by_name(This_class, name, cursor):
-#     obj = This_class.find_by_name(name, cursor)
-#     if not obj:
-#         obj = This_class()
-#         obj.name = name
-#     return obj
-
