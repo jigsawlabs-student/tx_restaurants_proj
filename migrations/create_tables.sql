@@ -31,9 +31,11 @@ CREATE TABLE IF NOT EXISTS cities_zipcodes (
       ON DELETE CASCADE
 );
 
+-- Should name actually be unique? Made it unique to agree with cities
+-- and zipcodes, and so find_by_name() will work in a consistent manner.
 CREATE TABLE IF NOT EXISTS merchants (
   id SERIAL PRIMARY KEY,
-  name VARCHAR(255) NOT NULL,
+  name VARCHAR(255) NOT NULL UNIQUE,
   cz_id INT,
   liquor_sales INT,
   beer_sales INT,
