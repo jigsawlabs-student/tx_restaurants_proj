@@ -128,7 +128,7 @@ def create_app(database='jigsaw_project_test', testing = TESTING, debug = DEBUGG
         conn = db.get_db()
         cursor = conn.cursor()
 
-        merchant = Merchant.find_by_name(merchant_name, cursor)
+        merchant = db.find_by_name(Merchant, merchant_name, cursor)
         zipcode = merchant.zipcode(cursor)
         city = merchant.city(cursor)
         merchant_dicts = [{'zipcode': zipcode.name, 'city': city.name}]

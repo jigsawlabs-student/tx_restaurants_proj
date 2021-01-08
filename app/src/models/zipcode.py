@@ -6,7 +6,7 @@ class Zipcode(models.Table):
     columns = ['id', 'name']
 
     def __init__(self, **kwargs):
-        Merchant.initialize_table(kwargs)
+        Zipcode.initialize_table(kwargs)
 
     def cities(self, cursor):
         """Return all cities in this zip code."""

@@ -1,6 +1,6 @@
 import pytest
 import psycopg2
-from app.src.models import City, Merchant, Zipcode
+from src.models import City, Merchant, Zipcode
 from app.src.db import close_db, get_db, db_pw, db_user, db_name, save, drop_all_tables
 
 
