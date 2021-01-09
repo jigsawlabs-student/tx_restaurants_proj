@@ -1,8 +1,21 @@
 ## Project for Jigsaw Labs fall/spring 2020–2021
 
-Read data from an [open source API provided by the state of Texas](https://data.texas.gov/resource/naix-2893.json) which shows liqour sales per venue/merchant. Sales are broken down by beer, wine, liquor, cover charges. Overlay this on a map of Texas. 
+This project both queries an external API via Flask, which then provides an internal API that is in turn queried by Streamlit.
 
-ZIPs and Cities are provided [here](https://www.unitedstateszipcodes.org/tx/#zips-list), but requires a bit of hand massaging because of multiple cities being on same lines of csv. Additional per-zip information available [here](https://www.zip-codes.com/zip-code-api-register.asp).
+Read data from [Texaas Mixed Beverage Gross Receipts](https://data.texas.gov/Government-and-Taxes/Mixed-Beverage-Gross-Receipts/naix-2893) [json API](https://data.texas.gov/resource/naix-2893.json) which shows liqour sales per venue/merchant. Sales are broken down by beer, wine, liquor, cover charges. Overlay this on a map of Texas. 
+
+Pull from TX API:
+- Location name
+- Location zip
+- Location city
+– Liquor receipts
+– Wine receipts
+– Beer receipts
+– Cover charge receipts
+
+ZIPs and Cities are provided as in Excel and csv format [here](https://www.unitedstateszipcodes.org/tx/#zips-list). Additional per-zip information available [here](https://www.zip-codes.com/zip-code-api-register.asp). The acceptable cities column was hand-curated to remove multiple spellings of the same city---this may have been a mistake, we'll see once we start to process addresses. Decommmissioned ZIPs were removed. Acceptable cities and Primary cities were combined.
+
+
 
 #### Tech used: 
 - Python 

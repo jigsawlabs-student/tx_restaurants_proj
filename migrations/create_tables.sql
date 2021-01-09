@@ -31,8 +31,33 @@ CREATE TABLE IF NOT EXISTS cities_zipcodes (
       ON DELETE CASCADE
 );
 
+----- This not in use until later. -----
+
+-- CREATE TABLE IF NOT EXISTS areacodes (
+--   id SERIAL PRIMARY KEY, -- Shouldn't need this, but forced to by  
+--                          -- save() in db.py.
+--   name VARCHAR(3) UNIQUE -- Forced to use VARCHAR by find_by_name() in db.py
+--   -- more to go here later, maybe
+-- );
+
+-- CREATE TABLE IF NOT EXISTS areacodes_zipcodes (
+--   id SERIAL PRIMARY KEY,
+--   area_id INT,
+--   zip_id INT,
+--   UNIQUE (area_id, zip_id),
+--   CONSTRAINT fk_areacode
+--       FOREIGN KEY(area_id) 
+--       REFERENCES areacodes(id)
+--       ON DELETE CASCADE,
+--   CONSTRAINT fk_zip
+--       FOREIGN KEY(zip_id) 
+--       REFERENCES zipcodes(id)
+--       ON DELETE CASCADE
+-- );
+
 -- Should name actually be unique? Made it unique to agree with cities
 -- and zipcodes, and so find_by_name() will work in a consistent manner.
+-- TODO: maybe add areacode here?
 CREATE TABLE IF NOT EXISTS merchants (
   id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL UNIQUE,
