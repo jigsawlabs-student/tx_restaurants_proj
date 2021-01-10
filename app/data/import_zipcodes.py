@@ -1,7 +1,7 @@
 import psycopg2
 import csv
 
-from models import Areacode, City, Zipcode
+from app import Areacode, City, Zipcode
 from src import db
 
 

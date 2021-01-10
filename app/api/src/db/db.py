@@ -11,10 +11,10 @@ if os.environ.get('TESTING') == 'True':
 db_user = os.environ.get('DB_USER')
 db_pw = os.environ.get('DB_PASS')
 # TODO: see line 26. Could/should do this in fixture instead, for eventual Flask testing.
-# ^^^ huh? ^^^
+# ^^^ huh? line 26? ^^^
 # TODO: Parts of this could/should be moved to orm.py, no?
 
-TABLES = ['zipcodes', 'cities', 'merchants', 'cities_zipcodes']
+TABLES = ['areacodes', 'zipcodes', 'cities', 'merchants', 'areacodes_zipcodes', 'cities_zipcodes']
 
 conn = psycopg2.connect(database=db_name, user=db_user, password=db_pw)
 cursor = conn.cursor()
@@ -100,13 +100,15 @@ def keys(obj):
     obj_attrs = obj.__dict__
     return [attr for attr in obj.columns if attr in obj_attrs.keys()]
 
-def drop_records(cursor, conn, table_name):
+def drop_records(table_name, cursor, conn):
+    """Drop all records from table_name."""
     cursor.execute(f"DELETE FROM {table_name};")
     conn.commit()
 
 def drop_tables(table_names, cursor, conn):
+    """Drop tables in input list table_names."""
     for table_name in table_names:
-        drop_records(cursor, conn, table_name)
+        drop_records(table_name, cursor, conn)
 
 def drop_all_tables(conn, cursor):
     table_names = TABLES

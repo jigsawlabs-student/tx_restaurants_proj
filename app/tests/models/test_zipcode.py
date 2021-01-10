@@ -1,7 +1,9 @@
 import pytest
 import psycopg2
-from app.src.models import City, CityZipcode, Merchant, Zipcode
-from app.src.db import close_db, get_db, db_pw, db_user, db_name, save, drop_all_tables
+
+from .context import api
+from api.models import City, CityZipcode, Merchant, Zipcode
+from api.db import close_db, get_db, db_pw, db_user, db_name, save, drop_all_tables
 
 
 conn = psycopg2.connect(database = db_name, user = db_user, password = db_pw)

@@ -1,5 +1,5 @@
 import psycopg2
-from src.models import City, Merchant, Zipcode, CityZipcode
+from models import City, Merchant, Zipcode, CityZipcode
 from src import db
 
 
