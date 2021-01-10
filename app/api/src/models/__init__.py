@@ -1,3 +1,4 @@
+from .areacode import Areacode
 from .table import Table
 from .city import City
 from .merchant import Merchant
