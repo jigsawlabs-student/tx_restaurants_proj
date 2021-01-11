@@ -1,11 +1,8 @@
 import pytest
 import psycopg2
-from app.src.models import City, CityZipcode, Merchant, Zipcode
-from app.src.db import close_db, get_db, db_pw, db_user, db_name, save, drop_all_tables
+from api.src.models import City, CityZipcode, Merchant, Zipcode
+from api.src.db import drop_all_tables, find_or_create, conn, cursor
 
-
-test_conn = psycopg2.connect(database = db_name, user = db_user, password = db_pw)
-test_cursor = test_conn.cursor()
 
 @pytest.fixture()
 def city():
@@ -20,7 +17,7 @@ def city():
     gramercy_zip = save(Zipcode(code=10010), test_conn, test_cursor)
     dumbo_zip = save(Zipcode(code=11210), test_conn, test_cursor)
     zips_list = ['11221', '11231', '11220', '11201', '11210']
-    brooklyn_zips = [save(Zipcode(code=z), test_conn, test_cursor) for z in zips_list]
+    brooklyn_zips = [save(Zipcode(code=z), test_conn, test_cursor)[0] for z in zips_list]
 
     for zipcode in brooklyn_zips:
         save(CityZipcode(city_id=brooklyn.id, zipcode=zipcode.zip), test_conn, test_cursor)
