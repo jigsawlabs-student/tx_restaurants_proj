@@ -1,5 +1,5 @@
-from src import db
-from src import models
+import api.src.db
+import api.src.models as models
 
 class Zipcode(models.Table):
     __table__ = 'zipcodes'

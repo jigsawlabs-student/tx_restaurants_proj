@@ -2,8 +2,8 @@ import psycopg2
 import pytest
 
 from .context import api
-from api.db import *
-from api.models import Areacode, City, CityZipcode, Merchant, Zipcode
+from src.api.db import *
+from src.api.models import Areacode, City, CityZipcode, Merchant, Zipcode
 
 # TODO: build out this test suite: it doesn't have enough coverage.
 

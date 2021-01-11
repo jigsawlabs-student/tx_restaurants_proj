@@ -1,13 +1,14 @@
 from distutils import util
+from dotenv import load_dotenv
 from flask import Flask, request
 import simplejson as json
-# from .db import get_db
-from .models import City, CityZipcode, Merchant, Table, Zipcode
+import os
 
-from .db import *
+# from db 
+from api.src.models import Areacode, City, CityZipcode, Merchant, Table, Zipcode
+
 # from .adaptors import *
 
-from dotenv import load_dotenv
 
 load_dotenv()
 

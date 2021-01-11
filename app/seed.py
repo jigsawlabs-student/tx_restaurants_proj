@@ -1,14 +1,14 @@
 import psycopg2
-from models import City, Merchant, Zipcode, CityZipcode
-from src import db
+from api.src.models import Areacode, City, Merchant, Zipcode, CityZipcode
+import api.src.db as db
 
 
 db.drop_all_tables(db.conn, db.cursor)
 
-def build_city_zipcode(city_name='', zipcode=''):
+def build_city_zipcode(city_name='', zip_name=''):
     """Create data for testing of city and zipcode tables."""
-    if city_name and zipcode:
-        zipcode = db.find_or_create(Zipcode(name=zipcode), db.conn, db.cursor)[0]
+    if city_name and zip_name:
+        zipcode = db.find_or_create(Zipcode(name=zip_name), db.conn, db.cursor)[0]
         city = db.find_or_create(City(name=city_name), db.conn, db.cursor)[0]
         cross = db.find_or_create(CityZipcode(city_id=city.id, zip_id=zipcode.id), db.conn, db.cursor)
     return city, zipcode, cross
@@ -22,7 +22,7 @@ def build_merchant(merchant_name='', zipcode_name='', city_name=''):
         merchant = db.find_or_create(Merchant(name=merchant_name, cz_id=zipcode_city_cross.id), db.conn, db.cursor)[0]
     return merchant
 
-mn, mn_zip, mn_x_100001 = build_city_zipcode('Manhattan', '10001')
+mn, mn_zip, mn_x_10001 = build_city_zipcode('Manhattan', '10001')
 ps, ps_zip, ps_x_11220 = build_city_zipcode('Park_Slope', '11220')
 bh, bh_zip, bh_x_11201 = build_city_zipcode('Brooklyn_Heights', '11201')
 ch, ch_zip, ch_x_11201 = build_city_zipcode('Cobble_Hill', '11201')
