@@ -6,7 +6,10 @@ class City(models.Table):
     columns = ['id', 'name']
 
     def __init__(self, **kwargs):
-        City.initialize_table(kwargs)
+        for key in kwargs.keys():
+            if key not in self.columns:
+                raise f'{key} not in {self.columns}' 
+            setattr(self, key, kwargs[key])
         
     def zipcodes(self, cursor):
         """Return all zip codes in this city."""

@@ -38,8 +38,6 @@ chucks = build_merchant('chucks', bh_zip.name, bh.name)
 charlies = build_merchant('charlies', ch_zip.name, ch.name)
 fonzis = build_merchant('fonzis', cg_zip.name, cg.name)
 
-print(fonzis.cz_id)
-print(find_or_create(CityZipcode(id=166), db.conn, db.cursor)[2])
 
 # find_or_create(CityZipcode(city_id=brooklyn.id, zip_id=brooklyn.zipcode), db.conn, db.cursor)
 # find_or_create(CityZipcode(city_id=brooklyn2.id, zip_id=brooklyn2.zipcode), db.conn, db.cursor)

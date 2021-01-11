@@ -2,11 +2,12 @@ from flask import current_app, g
 import psycopg2
 import os
 from dotenv import load_dotenv
+from distutils.util import strtobool
 
 load_dotenv()
 
 db_name = os.environ.get('DB_NAME')
-if os.environ.get('TESTING') == 'True':
+if strtobool(os.environ.get('TESTING')):
     db_name += '_test'
 db_user = os.environ.get('DB_USER')
 db_pw = os.environ.get('DB_PASS')
@@ -76,18 +77,15 @@ def find_or_create(obj, conn, cursor):
         conn.commit()
         cursor.execute(f'SELECT * FROM {obj.__table__} ORDER BY id DESC LIMIT 1')
     except Exception as e: # Need to have exception for unique fields. Must do SELECT after insertion. 
-                           # Doing SELECT first would return values weren't inserted for non-unique fields.
+                           # Doing SELECT first would return values already inserted for non-unique fields.
         condition_str = ' WHERE '
         for k in keys(obj):
             condition_str += k + ' = %s AND '
         condition_str = condition_str[:-5]
-        # print('SELECT * FROM ' + obj.__table__ + condition_str, tuple(values(obj)))
         cursor.execute('ROLLBACK')
         cursor.execute('SELECT * FROM ' + obj.__table__ + condition_str, tuple(values(obj)))
     records = cursor.fetchall()     # fetchall() and not fetchone() in case of non-unique fields
-    # print(record)
     result = build_from_records(type(obj), records)
-    # print(result)
     return result
 
 def values(obj):

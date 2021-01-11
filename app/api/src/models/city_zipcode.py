@@ -5,5 +5,8 @@ class CityZipcode(models.Table):
     columns = ['id', 'city_id', 'zip_id']
 
     def __init__(self, **kwargs):
-        CityZipcode.initialize_table(kwargs)
+        for key in kwargs.keys():
+            if key not in self.columns:
+                raise f'{key} not in {self.columns}' 
+            setattr(self, key, kwargs[key])
 

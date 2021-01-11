@@ -6,7 +6,10 @@ class Merchant(models.Table):
     columns = ['id', 'name', 'cz_id', 'liquor_sales', 'beer_sales', 'wine_sales', 'cover_sales']
 
     def __init__(self, **kwargs):
-        Merchant.initialize_table(kwargs)
+        for key in kwargs.keys():
+            if key not in self.columns:
+                raise f'{key} not in {self.columns}' 
+            setattr(self, key, kwargs[key])
 
     def city(self, cursor):
         """Return the city where this merchant is located."""
