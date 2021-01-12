@@ -1,5 +1,6 @@
 import pytest
 import psycopg2
+from .context import api
 from api.src.models import City, CityZipcode, Merchant, Zipcode
 from api.src.db import drop_all_tables, find_or_create, conn, cursor
 

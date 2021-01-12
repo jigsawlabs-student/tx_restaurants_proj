@@ -10,6 +10,7 @@ from api.src.db import conn, cursor, find_or_create, drop_all_tables
 def city():
     drop_all_tables(conn, cursor)
 
+<<<<<<< HEAD
     brooklyn = find_or_create(City(name='Brooklyn'), conn, cursor)[0]
     manhattan = find_or_create(City(name='Manhattan'), conn, cursor)[0]
     philadelphia = find_or_create(City(name='Philadelphia'), conn, cursor)[0]
