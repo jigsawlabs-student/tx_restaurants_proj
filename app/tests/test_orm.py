@@ -1,21 +1,24 @@
 import pytest
 from decimal import *
-from app.src import *
+
+from .context import api
+from api.src.models import City, CityZipcode, Merchant, Zipcode
+from api.src.db import cursor, conn, drop_all_tables, find_or_create
 
 @pytest.fixture()
 def build_cities():
-    drop_all_tables(test_conn, test_cursor)
+    drop_all_tables(conn, cursor)
     city = City()
     city.name = 'Brooklyn'
-    save(city, test_conn, test_cursor)
+    find_or_create(city, conn, cursor)
 
     city = City()
     city.name = 'Manhattan'
-    save(city, test_conn, test_cursor)
+    find_or_create(city, conn, cursor)
     yield
 
-    drop_all_tables(test_conn, test_cursor)
+    drop_all_tables(conn, cursor)
 
 def test_find_all(build_cities):
-    categories = find_all(city, test_cursor)
+    categories = find_all(city, cursor)
     assert [city.name for city in cities] == ['Brooklyn', 'Manhattan']
