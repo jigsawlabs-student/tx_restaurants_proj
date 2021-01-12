@@ -3,7 +3,7 @@ import api.src.models as models
 
 class Merchant(models.Table):
     __table__ = 'merchants'
-    columns = ['id', 'name', 'cz_id', 'liquor_sales', 'beer_sales', 'wine_sales', 'cover_sales']
+    columns = ['id', 'name', 'cz_id', 'liquor_sales', 'beer_sales', 'wine_sales', 'cover_sales', 'total_sales']
 
     def __init__(self, **kwargs):
         for key in kwargs.keys():

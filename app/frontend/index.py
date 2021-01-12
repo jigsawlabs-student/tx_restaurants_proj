@@ -14,7 +14,7 @@ def find_cities_for_zip(zipcode):
     response = requests.get(API_URL, params = {'cities_for_zip': zipcode})
     return response.json()
 
-# def venue_ratings(venues, requires_rating = False):
+# def venue_ratings(venues    , requires_rating = False):
 #     if requires_rating:
 #         venues = [venue for venue in venues if venue['rating'] != -99]
 #     return [venue['rating'] for venue in venues]
