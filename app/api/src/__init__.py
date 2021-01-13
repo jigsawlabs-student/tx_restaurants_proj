@@ -4,7 +4,7 @@ from flask import Flask, request
 import simplejson as json
 import os
 
-# from db 
+from api.src.db import find_all, find_by_name, get_db
 from api.src.models import Areacode, City, CityZipcode, Merchant, Table, Zipcode
 
 # from .adaptors import *
@@ -69,7 +69,7 @@ def create_app(database='jigsaw_project_test', testing = TESTING, debug = DEBUGG
         """
         conn = db.get_db()
         cursor = conn.cursor()
-        zipcodes = find_by_name(City, city_name, cursor).zipcodes(cursor)
+        zipcodes = db.find_by_name(City, city_name, cursor).zipcodes(cursor)
         print(zipcodes)
         zipcode_names = [zipcode.__dict__ for zipcode in zipcodes]
         return json.dumps(zipcode_names, default = str)

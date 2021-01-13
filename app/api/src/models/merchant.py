@@ -1,4 +1,4 @@
-import api.src.db
+import api.src.db as db
 import api.src.models as models
 
 class Merchant(models.Table):
