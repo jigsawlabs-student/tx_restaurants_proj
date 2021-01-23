@@ -1,4 +1,4 @@
-import api.src.db
+import api.src.orm
 import api.src.models as models
 
 class Areacode(models.Table):
@@ -17,4 +17,4 @@ class Areacode(models.Table):
                     )
         cursor.execute(query_str, (self.id,))
         records = cursor.fetchall()
-        return db.build_from_records(models.Zipcode, records)
+        return orm.build_from_records(models.Zipcode, records)

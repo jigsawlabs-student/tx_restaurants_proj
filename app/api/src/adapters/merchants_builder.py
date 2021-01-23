@@ -1,5 +1,6 @@
-import api.src.models as models
 import api.src.db as db
+import api.src.models as models
+import api.src.orm as orm
 import api.src.adapters as adapters
 import psycopg2
 
@@ -28,16 +29,16 @@ class MerchantBuilder:
 
     def run(self, merchant_details, cityzip, conn, cursor):
         selected = self.select_attributes(merchant_details, cityzip)
-        return db.find_or_create(models.Merchant(**selected), conn, cursor)[0]
+        return orm.find_or_create(models.Merchant(**selected), conn, cursor)[0]
 
 class CityzipBuilder:
     def run(self, merchant_details, conn, cursor):
         zipcode_name = merchant_details['location_zip']
         city_name = merchant_details['location_city']
 
-        zipcode = db.find_or_create(models.Zipcode(name=zipcode_name), conn, cursor)[0]
-        city = db.find_or_create(models.City(name=city_name), conn, cursor)[0]
-        cityzip = db.find_or_create(models.CityZipcode(city_id=city.id, zip_id=zipcode.id), 
+        zipcode = orm.find_or_create(models.Zipcode(name=zipcode_name), conn, cursor)[0]
+        city = orm.find_or_create(models.City(name=city_name), conn, cursor)[0]
+        cityzip = orm.find_or_create(models.CityZipcode(city_id=city.id, zip_id=zipcode.id), 
                                     conn, 
                                     cursor)[0]
         return cityzip

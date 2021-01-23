@@ -1,4 +1,4 @@
-import api.src.db as db
+import api.src.orm as orm
 import api.src.models as models
 
 class Merchant(models.Table):
@@ -20,7 +20,7 @@ class Merchant(models.Table):
                     )
         cursor.execute(query_str, (self.cz_id,))
         record = cursor.fetchone()
-        return db.build_from_record(models.City, record)
+        return orm.build_from_record(models.City, record)
 
 
     def zipcode(self, cursor):
@@ -32,4 +32,4 @@ class Merchant(models.Table):
                     )
         cursor.execute(query_str, (self.cz_id,))
         record = cursor.fetchone()
-        return db.build_from_record(models.Zipcode, record)
+        return orm.build_from_record(models.Zipcode, record)
