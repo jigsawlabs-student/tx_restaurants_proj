@@ -40,12 +40,6 @@ def create_app(database='jigsaw_project_test', testing = TESTING, debug = DEBUGG
         city_names = [city.__dict__ for city in cities]
         return json.dumps(city_names, default=str)
 
-    @app.route('/cities/<city_id>')
-    def city(city_id):
-        """Return complete record for city with id == city_id."""
-        city = orm.find_by_id(models.City, city_id, db.cursor)
-        return json.dumps(city.__dict__, default=str)
-
     @app.route('/cities/areacodes/<city_id>')
     def areacodes_for_city(city_id):
         """
@@ -55,6 +49,12 @@ def create_app(database='jigsaw_project_test', testing = TESTING, debug = DEBUGG
         areacodes = orm.find_by_id(City, city_id, db.cursor).areacodes(db.cursor)
         areacode_names = [areacode.__dict__ for zipcode in areacodes]
         return json.dumps(areacode_names, default = str)
+
+    @app.route('/cities/<city_id>')
+    def city(city_id):
+        """Return complete record for city with id == city_id."""
+        city = orm.find_by_id(models.City, city_id, db.cursor)
+        return json.dumps(city.__dict__, default=str)
 
     @app.route('/cities/merchants/<city_id>')
     def merchants_for_city(city_id):

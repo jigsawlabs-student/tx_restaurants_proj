@@ -18,7 +18,6 @@ def fill_db():
     builder = adapters.Builder()
     for report in reports:
         builder.run(report, db.conn, db.cursor)
-        i += 1
 
 
 fill_db()
