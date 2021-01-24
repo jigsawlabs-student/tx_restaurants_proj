@@ -3,12 +3,20 @@ import api.src.models as models
 
 class Merchant(models.Table):
     __table__ = 'merchants'
-    columns = ['id', 'name', 'cz_id', 'liquor_sales', 'beer_sales', 'wine_sales', 'cover_sales', 'total_sales']
+    columns = ['id',
+               'name',
+               'cz_id',
+               'liquor_sales',
+               'beer_sales',
+               'wine_sales',
+               'cover_sales',
+               'total_sales'
+              ]
 
     def __init__(self, **kwargs):
         for key in kwargs.keys():
             if key not in self.columns:
-                raise f'{key} not in {self.columns}' 
+                raise f'{key} not in {self.columns}'
             setattr(self, key, kwargs[key])
 
     def city(self, cursor):

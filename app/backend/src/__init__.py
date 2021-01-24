@@ -22,7 +22,7 @@ if TESTING:
 db_user = os.environ.get('DB_USER')
 db_pw = os.environ.get('DB_PASS')
 
-# TODO: What information should I "surface" on, say, city? 
+# TODO: What information should I "surface" on, say, city?
 
 def create_app(database='jigsaw_project_test', testing = TESTING, debug = DEBUGGING):
     """Create and configure an instance of the Flask application."""
@@ -43,7 +43,7 @@ def create_app(database='jigsaw_project_test', testing = TESTING, debug = DEBUGG
     @app.route('/cities/areacodes/<city_id>')
     def areacodes_for_city(city_id):
         """
-        For a city given by city_id, return complete record for all 
+        For a city given by city_id, return complete record for all
         areacodes in that city.
         """
         areacodes = orm.find_by_id(City, city_id, db.cursor).areacodes(db.cursor)
@@ -66,21 +66,13 @@ def create_app(database='jigsaw_project_test', testing = TESTING, debug = DEBUGG
     @app.route('/cities/zipcodes/<city_id>')
     def zips_for_city(city_id):
         """
-        For a city given by city_id, return complete record for all 
+        For a city given by city_id, return complete record for all
         zipcodes in that city.
         """
         zipcodes = orm.find_by_id(City, city_id, db.cursor).zipcodes(db.cursor)
         print(zipcodes)
         zipcode_names = [zipcode.__dict__ for zipcode in zipcodes]
         return json.dumps(zipcode_names, default = str)
-
-    # @app.route('/cities/search')
-    # def search_cities():
-
-    #     params = dict(request.args)
-    #     cities = models.city.search(params, db.cursor)
-    #     city_dicts = [city.to_json(db.cursor) for city in cities]
-    #     return json.dumps(city_dicts, default = str)
 
     @app.route('/zipcodes')
     def zipcodes():
@@ -92,7 +84,7 @@ def create_app(database='jigsaw_project_test', testing = TESTING, debug = DEBUGG
     @app.route('/zipcodes/areacodes/<zip_id>')
     def areacodes_for_zip(zip_id):
         """
-        For a zipcode given by zip_id, return complete record for all 
+        For a zipcode given by zip_id, return complete record for all
         areacodes in that zipcode.
         """
         areacodes = orm.find_by_id(Zipcode, zip_id, db.cursor).areacodes(db.cursor)

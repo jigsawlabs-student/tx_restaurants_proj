@@ -1,3 +1,4 @@
+from flask import current_app, g
 import psycopg2
 import os
 from dotenv import load_dotenv
@@ -13,22 +14,22 @@ db_pw = os.environ.get('DB_PASS')
 # TODO: see line 26. Could/should do this in fixture instead, for eventual Flask testing.
 # ^^^ huh? line 26? ^^^
 
-TABLES = ['areacodes', 
-          'zipcodes', 
-          'cities', 
-          'merchants', 
-          'areacodes_zipcodes', 
+TABLES = ['areacodes',
+          'zipcodes',
+          'cities',
+          'merchants',
+          'areacodes_zipcodes',
           'cities_zipcodes',
          ]
 
 conn = psycopg2.connect(database=db_name, user=db_user, password=db_pw)
 cursor = conn.cursor()
 
-# def get_db(database_name=''):
-#     if "db" not in g:
-#         g.db = psycopg2.connect(user=db_user, password=db_pw,
-#             dbname = current_app.config['DATABASE'])
-#     return g.db
+def get_db(database_name=''):
+    if "db" not in g:
+        g.db = psycopg2.connect(user=db_user, password=db_pw,
+            dbname = current_app.config['DATABASE'])
+    return g.db
 
 def close_db(e=None):
     db = g.pop("db", None)
