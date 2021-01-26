@@ -1,5 +1,5 @@
-import api.src.orm
-import api.src.models as models
+import backend.src.orm
+import backend.src.models as models
 
 class Areacode(models.Table):
     __table__ = 'areacodes'

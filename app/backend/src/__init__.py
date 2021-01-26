@@ -4,9 +4,9 @@ from flask import Flask, request
 import simplejson as json
 import os
 
-# from api.src.db import conn, cursor
-from api.src.models import Areacode, City, CityZipcode, Merchant, Table, Zipcode
-from api.src.orm import find_all, find_by_id
+# from backend.src.db import conn, cursor
+from backend.src.models import Areacode, City, CityZipcode, Merchant, Table, Zipcode
+from backend.src.orm import find_all, find_by_id
 
 # from .adaptors import *
 

@@ -2,9 +2,9 @@ import pytest
 import psycopg2
 
 from .context import api
-from api.src.models import City, Merchant, Zipcode, CityZipcode
-from api.src.orm import find_or_create
-from api.src.db import drop_all_tables
+from backend.src.models import City, Merchant, Zipcode, CityZipcode
+from backend.src.orm import find_or_create
+from backend.src.db import drop_all_tables
 
 
 @pytest.fixture()
