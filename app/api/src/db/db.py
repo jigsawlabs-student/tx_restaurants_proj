@@ -67,6 +67,9 @@ def find_by_name(This_class, name, cursor):
     record = cursor.fetchone()
     return build_from_record(This_class, record)
 
+
+# JK: Instead of exception for non unique, is it possible to only create if does not exist.  
+# Generally, try to avoid exceptions and rollbacks, so would continue to look for other ways to avoid.
 def find_or_create(obj, conn, cursor):
     """Save values in input obj into DB. Return a *list* of *new* objects of same type."""
     values_str = ', '.join(len(values(obj)) * ['%s'])
