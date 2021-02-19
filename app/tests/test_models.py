@@ -2,15 +2,15 @@ import pytest
 import psycopg2
 
 from .context import api
-from api.src.models import City, Merchant, Zipcode, CityZipcode
-from api.src.db import conn, cursor, find_or_create, drop_all_tables
+from backend.src.models import City, Merchant, Zipcode, CityZipcode
+from backend.src.orm import find_or_create
+from backend.src.db import drop_all_tables
 
 
 @pytest.fixture()
 def city():
     drop_all_tables(conn, cursor)
 
-<<<<<<< HEAD
     brooklyn = find_or_create(City(name='Brooklyn'), conn, cursor)[0]
     manhattan = find_or_create(City(name='Manhattan'), conn, cursor)[0]
     philadelphia = find_or_create(City(name='Philadelphia'), conn, cursor)[0]

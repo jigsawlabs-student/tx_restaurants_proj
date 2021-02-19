@@ -1,4 +1,4 @@
 import api.src as src
 from .client import *
-from .venues_builder import *
+from .merchants_builder import *
 

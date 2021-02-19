@@ -1,12 +1,12 @@
 import pytest
 from api.src.models import City, Merchant, Zipcode, CityZipcode
-from api.src.db import drop_all_tables, find_or_create, conn, cursor
+from api.src.orm import drop_all_tables, find_or_create
 
 
 # @pytest.fixture()
 @pytest.fixture
 def set_up_tear_down_db():
-    drop_all_tables(conn, cursor)
+    drop_all_tables()
     yield
     drop_all_tables(conn, cursor)
 
